@@ -1,14 +1,17 @@
-from mss import mss
 import cv2
-import numpy as np
-
-sct = mss()
+import pyautogui
+import numpy as np  
 
 while True:
-    screenshot = sct.grab(sct.monitors[1])
-    # Only take the RGB channels for each pixel
-    img = np.array(screenshot)[:, :, :3]
-    cv2.imshow('Screen Capture', img)
+    # Capture screenshot
+    screenshot = pyautogui.screenshot()
+    # Convert the image into numpy array representation
+    frame = np.array(screenshot)
+    # Convert the BGR image into RGB image
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    # Display the RGB image
+    cv2.imshow('Screen Capture', frame)
+    # Wait for the user to press 'q' key to stop the program
     if cv2.waitKey(1) == ord('q'):
         break
 
